@@ -6,14 +6,14 @@
 	var ESCAPE_KEY = 27;
 
 	var TODO_TMP =  [
-		'<li class='@(ifCompleted)' data-id="@(id)">',
-		'				<div class="view">',
-		'					<input class="toggle" type="checkbox" @(ifChecked)>',
-		'					<label>@(title)</label>',
-		'					<button class="destroy"></button>',
-		'				</div>',
-		'				<input class="edit" value="@(title)">',
-		'			</li>'
+		'<li class="@(ifCompleted)" data-id="@(id)">',
+		'	<div class="view">',
+		'		<input class="toggle" type="checkbox" @(ifChecked)>',
+		'		<label>@(title)</label>',
+		'		<button class="destroy"></button>',
+		'	</div>',
+		'	<input class="edit" value="@(title)">',
+		'</li>'
 		].join("");
 
 	var FOOTER_TMP = [
@@ -28,8 +28,8 @@
 		'				<li>',
 		'					<a class="@(completed_selected)" href="#/completed">Completed</a>',
 		'				</li>',
-		'			</ul>'
-		'@(ifCompletedTodos)'
+		'			</ul>',
+		'@(ifCompletedTodos)',
 		'<button id="clear-completed">Clear completed</button>'
 		].join("");
 
@@ -53,7 +53,7 @@
 		},
 
 		store: function(namespace,data){
-			if(argumnets.length > 1){
+			if(arguments.length > 1){
 				return localStorage.setItem(namespace,JSON.stringfy(data));
 			}else{
 				var store = localStorage.getItem(namespace);
@@ -70,15 +70,83 @@
 
 	var App = {
 		init: function(){
-			this.todos = util.store('todos-jquery');
-			this.todoTemplate = TODO_TMP;
-			this.footerTemplate = FOOTER_TMP;
-			this.bindEvent();
+			var t = this;
+			t.todos = util.store('todos-jquery');
+			t.todoTemplate = TODO_TMP;
+			t.footerTemplate = FOOTER_TMP;
+			t.bindEvent();
+		},
 
-			new Router
+		bindEvent: function(){
+			var t = this;
+			$('#new-todo').on('keyup',t.create.bind(t))
+		},
 
+		render: function(){
+			var t = this;
+			var todos = t.getFilteredTodos();
+			var todoHtml = formString(t.todoTemplate,$.extend(todos,{
+				ifCompleted: todos.completed ? 'completed' : '',
+				ifChecked: todos.completed ? 'checked':'',
+			}));
+			$('todo-list').html(todoHtml);//不用模板引擎的缺点在于需要单写逻辑
+			$('#main').toggle(todos.length > 0);
+			$('#toggle-all').prop('checked',t.getActiveTodos().length === 0);
+			t.renderFooter();
+			$('#new-todo').focus();
+			util.store('todos-jquery',this.todos);
+		},
+
+		renderFooter: function(){},
+
+		getActiveTodos: function(){
+			return this.todos.filter(function(todo){
+				return !todo.completed
+			})
+		},
+
+		getCompletedTodos: function(){
+			return this.todos.filter(function(todo){
+				return todo.completed
+			})
+		},
+
+		getFilteredTodos: function(){
+			if(this.filter === 'active'){
+				return this.getActiveTodos();
+			}
+
+			if(this.filter === 'completed'){
+				return this.getCompletedTodos();
+			}
+
+			return this.todos;
 		}
+
+		create: function(e){
+			var t = this;
+			var $input = $(e.target);
+			var val = $input.val().trim();
+
+			if(e.which !== ENTER_KEY || !val){
+				return
+			}
+
+			t.todos.push({
+				id: util.uuid(),
+				title: val,
+				completed: false
+			})
+
+			$input.val('');
+
+			this.render();
+		}
+
+
 	}
+
+	App.init()
 
 
 
