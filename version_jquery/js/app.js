@@ -20,17 +20,16 @@
 		'<span id="todo-count"><strong>@(activeTodoCount)</strong> @(activeTodoWord) left</span>',
 		'			<ul id="filters">',
 		'				<li>',
-		'					<a class="@(all_selected)" href="#/all">All</a>',
+		'					<a class="@(all_selected)" data-filter="all">All</a>',
 		'				</li>',
 		'				<li>',
-		'					<a class="@(active_selected)" href="#/active">Active</a>',
+		'					<a class="@(active_selected)" data-filter="active">Active</a>',
 		'				</li>',
 		'				<li>',
-		'					<a class="@(completed_selected)" href="#/completed">Completed</a>',
+		'					<a class="@(completed_selected)" data-filter="completed">Completed</a>',
 		'				</li>',
 		'			</ul>',
 		'@(ifCompletedTodos)',
-		'<button id="clear-completed">Clear completed</button>'
 		].join("");
 
 	var util = {
@@ -49,12 +48,12 @@
 		},
 
 		pluralize: function(count,word){
-			return cound === 1 ? word : word + 's';
+			return count === 1 ? word : word + 's';
 		},
 
 		store: function(namespace,data){
 			if(arguments.length > 1){
-				return localStorage.setItem(namespace,JSON.stringfy(data));
+				return localStorage.setItem(namespace,JSON.stringify(data));
 			}else{
 				var store = localStorage.getItem(namespace);
 				return (store && JSON.parse(store)) || [];
@@ -72,32 +71,74 @@
 		init: function(){
 			var t = this;
 			t.todos = util.store('todos-jquery');
-			t.todoTemplate = TODO_TMP;
-			t.footerTemplate = FOOTER_TMP;
+			t.todoTmp = TODO_TMP;
+			t.footerTmp = FOOTER_TMP;
 			t.bindEvent();
+			t.render();
 		},
 
 		bindEvent: function(){
 			var t = this;
-			$('#new-todo').on('keyup',t.create.bind(t))
+			$('#new-todo').on('keyup',t.create.bind(t));
+			$('#toggle-all').on('change',t.toggleAll.bind(t));
+			$('#footer').on('click','#clear-completed',t.destroyCompleted.bind(t));
+			$('#filters').on('click','li',t.chooseFilter.bind(t));
+			$('#todo-list')
+				.on('change','.toggle',t.toggle.bind(t))
+				.on('dblclick','label',t.edit.bind(t))
+				.on('keyup','.edit',t.editKeyup.bind(t))
+				.on('focusout','.edit',t.update.bind(t))
+				.on('click','.destroy',t.destroy.bind(t))
 		},
 
 		render: function(){
 			var t = this;
 			var todos = t.getFilteredTodos();
-			var todoHtml = formString(t.todoTemplate,$.extend(todos,{
-				ifCompleted: todos.completed ? 'completed' : '',
-				ifChecked: todos.completed ? 'checked':'',
-			}));
-			$('todo-list').html(todoHtml);//不用模板引擎的缺点在于需要单写逻辑
+			var theHtml = ''
+			for(var i = 0 , len = todos.length ; i < len ; i++){
+				var todo = todos[i];
+				theHtml += util.formString(t.todoTmp,$.extend(todo,{
+					ifCompleted: todo.completed ? 'completed' : '',
+					ifChecked: todo.completed ? 'checked':'',
+				}));
+			} 
+
+			$('#todo-list').html(theHtml);//不用模板引擎的缺点在于需要单写逻辑
 			$('#main').toggle(todos.length > 0);
 			$('#toggle-all').prop('checked',t.getActiveTodos().length === 0);
+			
 			t.renderFooter();
+
 			$('#new-todo').focus();
 			util.store('todos-jquery',this.todos);
 		},
 
-		renderFooter: function(){},
+		renderFooter: function(){
+			var t = this;
+			var todoCount = t.todos.length;
+			var activeTodoCount = t.getActiveTodos.length;
+			var completedTodos = todoCount - activeTodoCount;
+			var theHtml = util.formString(t.footerTmp,{
+				activeTodoCount: activeTodoCount,
+				activeTodoWord: util.pluralize(activeTodoCount,'item'),
+				ifCompletedTodos: completedTodos ? '<button id="clear-completed">Clear completed</button>' : '',
+				all_selected: t.filter == 'all' ? 'selected' : '',
+				active_selected: t.filter == 'active' ? 'selected' : '',
+				completed_selected: t.filter == 'completed' ? 'selected' : ''
+			});
+
+			$('#footer').toggle(todoCount > 0).html(theHtml);
+		},
+
+		toggleAll: function(e){
+			var t = this;
+			var isChecked = $(e.target).prop('checked');
+			t.todos.forEach(function(todo){
+				todo.completed = isChecked;
+			});
+
+			t.render();
+		},
 
 		getActiveTodos: function(){
 			return this.todos.filter(function(todo){
@@ -121,7 +162,34 @@
 			}
 
 			return this.todos;
-		}
+		},
+
+		destroyCompleted: function(){
+			var t = this;
+			t.todos = t.getActiveTodos();
+			this.filter = 'all',
+			this.render();
+		},
+
+		chooseFilter:function(e){
+			var t = this;
+			var $el = $(e.target);
+			var $a = $el.children('a');
+			var filter = $a.attr('data-filter');
+			t.filter = filter;
+			t.render()
+		},
+
+		indexFromEl: function(el){
+			var id = $(el).closest('li').data('id');
+			var todos = this.todos;
+			var i = todos.length;
+			while(i--){
+				if(todos[i].id === id){
+					return i;
+				}
+			}
+		},
 
 		create: function(e){
 			var t = this;
@@ -140,11 +208,56 @@
 
 			$input.val('');
 
+			t.render();
+		},
+
+		toggle: function(e){
+			var  i = this.indexFromEl(e.target);
+			this.todos[i].completed = !this.todos[i].completed;
+			this.render();
+		},
+
+		edit: function(e){
+			var $input = $(e.target).closest('li').addClass('editing').find('.edit');
+			$input.val($input.val()).focus();
+		},
+
+		editKeyup: function(e){
+			if(e.which === ENTER_KEY){
+				e.target.blur();
+			}
+
+			if(e.which === ESCAPE_KEY){
+				$(e.target).data('abort',true).blur();
+			}
+		},
+
+		update: function(e){
+			var t = this;
+			var el = e.target;
+			var $el = $(el);
+			var val = $el.val().trim();
+
+			if(!val){
+				t.destroy(e);
+				return;
+			}
+
+			if($el.data('abort')){
+				$el.data('abort',false);
+			}else{
+				t.todos[t.indexFromEl(el).title = val];
+			}
+
+			t.render();
+		},
+
+		destroy: function(e){
+			var t = this;
+			t.todos.splice(t.indexFromEl(e.target),1);
 			this.render();
 		}
-
-
-	}
+	};
 
 	App.init()
 
