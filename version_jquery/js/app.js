@@ -82,7 +82,7 @@
 			$('#new-todo').on('keyup',t.create.bind(t));
 			$('#toggle-all').on('change',t.toggleAll.bind(t));
 			$('#footer').on('click','#clear-completed',t.destroyCompleted.bind(t));
-			$('#filters').on('click','li',t.chooseFilter.bind(t));
+			$('#footer').on('click','#filters li',t.chooseFilter.bind(t));
 			$('#todo-list')
 				.on('change','.toggle',t.toggle.bind(t))
 				.on('dblclick','label',t.edit.bind(t))
@@ -174,7 +174,7 @@
 		chooseFilter:function(e){
 			var t = this;
 			var $el = $(e.target);
-			var $a = $el.children('a');
+			var $a = $el.get(0).tagName.toString().toLowerCase() == 'a' ? $el:$el.find('a');
 			var filter = $a.attr('data-filter');
 			t.filter = filter;
 			t.render()
