@@ -49,7 +49,7 @@ var app = app || {};
 				this.$main.hide();
 				this.$footer.hide();
 			};
-			
+
 			this.allCheckbox.checked = !remaining
 		},
 
@@ -84,6 +84,11 @@ var app = app || {};
 				app.todos.create(this.newAttributes());
 				this.$input.val('');
 			}
+		},
+
+		clearCompleted: function () {
+			_.invoke(app.todos.completed(), 'destroy');
+			return false;
 		},
 
 		toggleAllComplete: function(){
