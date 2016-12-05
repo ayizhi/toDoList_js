@@ -5,7 +5,7 @@ var app = app || {};
 
 	app.AppView = Backbone.View.extend({
 		el: '.todoapp',
-		statsTemplate: _.template($('#state-template').html()),
+		statsTemplate: _.template($('#stats-template').html()),
 		events: {
 			'keypress .new-todo': 'createOnEnter',
 			'click .clear-completed': 'clearCompleted',
@@ -23,7 +23,7 @@ var app = app || {};
 			t.listenTo(app.todos,'reset',t.addAll);
 			t.listenTo(app.todos,'change:completed',t.filterOne);
 			t.listenTo(app.todos,'filter',t.filterAll);
-			t.listenTo(app.todos,'all',_.debounce(this.render,0));
+			t.listenTo(app.todos,'all',_.debounce(t.render,0));
 
 			app.todos.fetch({reset: true});
 		},
@@ -48,7 +48,8 @@ var app = app || {};
 			}else{
 				this.$main.hide();
 				this.$footer.hide();
-			}
+			};
+			
 			this.allCheckbox.checked = !remaining
 		},
 
