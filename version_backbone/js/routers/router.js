@@ -2,7 +2,6 @@ var app = app || {};
 
 (function(){
 	'use strict';
-
 	var TodoRouter = Backbone.Router.extend({
 		routes: {
 			'*filter': 'setFilter',
@@ -16,4 +15,4 @@ var app = app || {};
 
 	app.TodoRouter = new TodoRouter();
 	Backbone.history.start();
-})
+})()
