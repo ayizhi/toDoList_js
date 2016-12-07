@@ -77,7 +77,9 @@ var app = app || {};
 			this.props.model.clearCompleted();
 		},
 
-		render: function(){}
+		render: function(){
+			
+		}
 
 
 	})
