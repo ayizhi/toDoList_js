@@ -136,24 +136,33 @@ var app = app || {};
 
 			return (
 				<div>
-				<header className="header">
-				<h1>todos</h1>
-				<input className="new-todo"
-				placeholder = 'what needs to be done?'
-				value = {this.state.newTodo}
-				onKeyDown = {this.handleNewTodoKeyDown}
-				onChange = {this.handleChange}
-				autoFocus = {true}
-				/>
-				</header>
+					<header className="header">
+						<h1>todos</h1>
+						<input className="new-todo"
+						placeholder = 'what needs to be done?'
+						value = {this.state.newTodo}
+						onKeyDown = {this.handleNewTodoKeyDown}
+						onChange = {this.handleChange}
+						autoFocus = {true}
+						/>
+					</header>
+					{main}
+					{footer}
 				</div>
-				)
-
-				
-			
+			)
 		}
+	});
+	
+	var model = new app.TodoModel('react-todos');
 
+	function render(){
+		React.render(
+			<TodoApp model={model}/>,document.getELementsByClassName('todoapp')[0]
+			);
+	}
 
-	})
+	model.subscribe(render);
+	render()
+
 
 })()
