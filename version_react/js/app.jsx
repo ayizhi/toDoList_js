@@ -92,7 +92,7 @@ var app = app || {};
 				}
 			},this);
 
-			var todoItem = shownTodos.map(function(to){
+			var todoItems = shownTodos.map(function(to){
 				return (<TodoItem 
 					key = {todo.id}
 					todo = {todo}
@@ -119,6 +119,35 @@ var app = app || {};
 					onClearCompleted = {this.clearCompleted}
 				/>;
 			}
+
+			if(todos.length){
+				main = (
+					<section>
+					<input
+						className = 'toggle-all'
+						type = 'checkbox'
+						onChange = {this.toggleAll}
+						checked = {activeTodoCount === 0}
+					/>
+					<ul className="todo-list">{todoItems}</ul>
+				</section>
+				);
+			}
+
+			return (
+				<div>
+				<header className="header">
+				<h1>todos</h1>
+				<input className="new-todo"
+				placeholder = 'what needs to be done?'
+				value = {this.state.newTodo}
+				onKeyDown = {this.handleNewTodoKeyDown}
+				onChange = {this.handleChange}
+				autoFocus = {true}
+				/>
+				</header>
+				</div>
+				)
 
 				
 			
