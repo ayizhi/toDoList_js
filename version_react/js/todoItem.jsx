@@ -37,7 +37,31 @@ var app = app || {}
 		},
 
 		getInitialState: function () {
-			
+			return {editText: this.props.todo.title}
+		},
+
+		shouldComponentUpdate: function(nextProps, nextState) {
+			return (
+				nextProps.todo !== this.props.todo || 
+				nextProps.editing !== this.props.editing ||
+				nextState.editText !== this.state.editText
+			);
+		},
+
+		componentDidUpdate: function (prevProps) {
+			if (!prevProps.editing && this.props.editing) {
+				var node = React.findDOMNode(this.refs.editField);
+				node.focus();
+				node.setSelectionRange(node.value.length, node.value.length);
+			}
+		},
+
+		componentDidUpdate: function(prevProps){
+			if(!prevProps.editing && this.props.editing){
+				var node = React.findDOMNode(this.refs.editField);
+				node.focus();
+				node.setSelectionRange(node.value.length, node.value.length);
+			}
 		}
 
 
