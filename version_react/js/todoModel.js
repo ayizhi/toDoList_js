@@ -30,12 +30,13 @@ var app = app || {}
 
 	app.TodoModel.prototype.toggleAll = function(checked){
 		this.todos = this.todos.map(function(todo){
-			return Utils.extend({
+			return Utils.extend(
 				{},
 				todo,
 				{completed: checked}
 				)
 		})
+
 		this.inform();
 	};
 
