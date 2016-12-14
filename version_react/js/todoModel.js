@@ -24,7 +24,7 @@ var app = app || {}
 			id: Utils.uuid,
 			title: title,
 			completed: false
-		}};
+		});
 		this.inform()
 	};
 
@@ -33,8 +33,8 @@ var app = app || {}
 			return Utils.extend({
 				{},
 				todo,
-				{completed: true}
-			})
+				{completed: checked}
+				)
 		})
 		this.inform();
 	};
