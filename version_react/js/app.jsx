@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function(){
+(function(React){
 	'use strict'
 	app.ALL_TODOS = 'all';
 	app.ACTIVE_TODOS = 'active';
@@ -85,7 +85,7 @@ var app = app || {};
 				switch(this.state.nowShowing){
 					case app.ACTIVE_TODOS:
 						return !todo.completed;
-					case app.COMPLETED_TODOS;
+					case app.COMPLETED_TODOS:
 						return todo.completed;
 					default:
 						return true;
@@ -152,17 +152,20 @@ var app = app || {};
 			)
 		}
 	});
-	
+
+	console.log(app)
 	var model = new app.TodoModel('react-todos');
 
+	console.log(React.render)
 	function render(){
 		React.render(
-			<TodoApp model={model}/>,document.getELementsByClassName('todoapp')[0]
-			);
+			<TodoApp model={model}/>,
+			document.getElementsByClassName('todoapp')[0]
+		);
 	}
 
 	model.subscribe(render);
 	render()
 
 
-})()
+})(React)

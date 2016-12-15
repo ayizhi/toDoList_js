@@ -1,5 +1,4 @@
-var app = app || {}
-
+var app = app || {};
 (function(){
 	'use strict';
 	var Utils = app.Utils;
@@ -67,6 +66,5 @@ var app = app || {}
 		})
 		this.inform();
 	}
-
 
 })()
