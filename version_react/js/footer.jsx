@@ -21,17 +21,20 @@ var app = app || {};
 					<span className="todo-count">
 						<strong>{this.props.count}</strong> {activeTodoWord} left
 					</span>
-					<ul className="filter">
+					<ul className="filters">
 						<li>
-						<a href="#/" className={className({selected: nowShowing === app.ALL_TODOS})}>All</a>
+						<a href="#/"
+						   className={classNames({selected: nowShowing === app.ALL_TODOS})}>All</a>
 						</li>
 						{' '}
 						<li>
-						<a href="#/active" className={classNames({selected: nowShowing === app.ACTIVE_TODOS})}>Active</a>
+						<a href="#/active"
+						   className={classNames({selected: nowShowing === app.ACTIVE_TODOS})}>Active</a>
 						</li>
 						{' '}
 						<li>
-						<a href="#/completed" className={classNames({selected: nowShowing === app.COMPLETED_TODOS})}>
+						<a href="#/completed"
+						   className={classNames({selected: nowShowing === app.COMPLETED_TODOS})}>
 							Completed
 						</a>
 						</li>

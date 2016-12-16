@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function(React){
+(function(){
 	'use strict'
 	app.ALL_TODOS = 'all';
 	app.ACTIVE_TODOS = 'active';
@@ -81,6 +81,7 @@ var app = app || {};
 			var footer;
 			var main;
 			var todos = this.props.model.todos;
+
 			var shownTodos = todos.filter(function(todo){
 				switch(this.state.nowShowing){
 					case app.ACTIVE_TODOS:
@@ -92,8 +93,9 @@ var app = app || {};
 				}
 			},this);
 
-			var todoItems = shownTodos.map(function(to){
-				return (<TodoItem 
+			var todoItems = shownTodos.map(function(todo){
+				return (
+					<TodoItem
 					key = {todo.id}
 					todo = {todo}
 					onToggle = {this.toggle.bind(this,todo)}
@@ -102,12 +104,13 @@ var app = app || {};
 					editing = {this.state.editing === todo.id}
 					onSave = {this.save.bind(this,todo)}
 					onCancel = {this.cancel}
-					/>)
+					/>
+				);
 			},this);
 
-			var activeTodoCount = todo.reduce(function(accum,todo){
+			var activeTodoCount = todos.reduce(function(accum,todo){
 				return todo.completed ? accum : accum + 1
-			})
+			},0)
 
 			var completedCount = todos.length - activeTodoCount;
 
@@ -122,7 +125,7 @@ var app = app || {};
 
 			if(todos.length){
 				main = (
-					<section>
+					<section className="main">
 					<input
 						className = 'toggle-all'
 						type = 'checkbox'
@@ -153,12 +156,10 @@ var app = app || {};
 		}
 	});
 
-	console.log(app)
 	var model = new app.TodoModel('react-todos');
 
-	console.log(React.render)
 	function render(){
-		React.render(
+		ReactDOM.render(
 			<TodoApp model={model}/>,
 			document.getElementsByClassName('todoapp')[0]
 		);
@@ -168,4 +169,4 @@ var app = app || {};
 	render()
 
 
-})(React)
+})()

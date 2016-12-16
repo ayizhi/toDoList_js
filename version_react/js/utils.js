@@ -30,7 +30,7 @@ var app = app || {};
 			}
 			var store = localStorage.getItem(namespace);
 
-			return (store && JOSN.parse(store)) || [];
+			return (store && JSON.parse(store)) || [];
 		},
 
 		extend: function(){

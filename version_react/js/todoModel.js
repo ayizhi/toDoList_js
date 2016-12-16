@@ -20,7 +20,7 @@ var app = app || {};
 
 	app.TodoModel.prototype.addTodo = function(title){
 		this.todos = this.todos.concat({
-			id: Utils.uuid,
+			id: Utils.uuid(),
 			title: title,
 			completed: false
 		});

@@ -1,6 +1,5 @@
-var app = app || {}
-
-(function(){
+var app = app || {};
+(function(app){
 	'use strict'
 	var ESCAPE_KEY = 27;
 	var ENTER_KEY = 13;
@@ -42,7 +41,7 @@ var app = app || {}
 
 		shouldComponentUpdate: function(nextProps, nextState) {
 			return (
-				nextProps.todo !== this.props.todo || 
+				nextProps.todo !== this.props.todo ||
 				nextProps.editing !== this.props.editing ||
 				nextState.editText !== this.state.editText
 			);
@@ -83,4 +82,4 @@ var app = app || {}
 		},
 	})
 
-})()
+})(app);
