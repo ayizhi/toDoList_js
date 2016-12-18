@@ -1,6 +1,5 @@
-(function(){
+(function(exports){
     'use strict';
-
     var STORAGE_KEY = 'todos-vue.js';
     exports.todoStorage = {
         fetch: function(){
