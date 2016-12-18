@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8e54bae-aadb-4082-8992-611bfcf75970" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/version_vue/.babelrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version_vue/index.html" afterPath="$PROJECT_DIR$/version_vue/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version_vue/js/store.js" afterPath="$PROJECT_DIR$/version_vue/js/store.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version_vue/js/routes.js" afterPath="$PROJECT_DIR$/version_vue/js/routes.js" />
     </list>
     <ignored path="toDoList_js.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,18 +29,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/version_vue/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="53" column="39" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/version_react/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="15" selection-end-column="17" />
+            <state relative-caret-position="375">
+              <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -51,8 +39,18 @@
       <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/version_vue/js/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+            <state relative-caret-position="170">
+              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="director.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/version_vue/lib/director.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-165">
+              <caret line="391" column="26" selection-start-line="391" selection-start-column="17" selection-end-line="391" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -107,11 +105,11 @@
         <option value="$PROJECT_DIR$/version_vue/css/base.css" />
         <option value="$PROJECT_DIR$/version_vue/css/index.css" />
         <option value="$PROJECT_DIR$/version_react/index.html" />
-        <option value="$PROJECT_DIR$/version_vue/js/routes.js" />
         <option value="$PROJECT_DIR$/version_vue/js/app.js" />
         <option value="$PROJECT_DIR$/version_vue/.babelrc" />
         <option value="$PROJECT_DIR$/version_vue/js/store.js" />
         <option value="$PROJECT_DIR$/version_vue/index.html" />
+        <option value="$PROJECT_DIR$/version_vue/js/routes.js" />
       </list>
     </option>
   </component>
@@ -185,6 +183,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="version_vue" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toDoList_js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toDoList_js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="version_vue" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -374,12 +390,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1481798652586</updated>
-      <workItem from="1481798655100" duration="12459000" />
+      <workItem from="1481798655100" duration="13255000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12459000" />
+    <option name="totallyTimeSpent" value="13255000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="723" extended-state="6" />
@@ -574,10 +590,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/version_vue/js/routes.js">
+    <entry file="file://$PROJECT_DIR$/version_vue/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        <state relative-caret-position="375">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -590,10 +606,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/version_vue/index.html">
+    <entry file="file://$PROJECT_DIR$/version_vue/lib/director.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="39" />
+        <state relative-caret-position="-165">
+          <caret line="391" column="26" selection-start-line="391" selection-start-column="17" selection-end-line="391" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version_vue/js/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
           <folding />
         </state>
       </provider>
