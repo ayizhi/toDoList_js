@@ -1,0 +1,39 @@
+{
+  "vue": {
+    "name": "Vue.js",
+    "description": "Vue.js provides efficient MVVM data bindings with a simple and flexible API. It uses plain JavaScript object models, DOM-based templating and extendable directives and filters.",
+    "homepage": "vuejs.org",
+    "examples": [{
+      "name": "Example",
+      "url": "examples/vue"
+    }],
+    "link_groups": [{
+      "heading": "Official Resources",
+      "links": [{
+        "name": "Documentation",
+        "url": "http://vuejs.org/guide/"
+      }, {
+        "name": "API Reference",
+        "url": "http://vuejs.org/api/"
+      }, {
+        "name": "Examples",
+        "url": "http://vuejs.org/examples/"
+      }, {
+        "name": "Vue.js on GitHub",
+        "url": "https://github.com/yyx990803/vue"
+      }]
+    }, {
+      "heading": "Community",
+      "links": [{
+        "name": "Twitter",
+        "url": "http://twitter.com/vuejs"
+      }, {
+        "name": "Gitter Channel",
+        "url": "https://gitter.im/yyx990803/vue"
+      }, {
+        "name": "Discussions on GitHub",
+        "url": "https://github.com/vuejs/Discussion/issues"
+      }]
+    }]
+  }
+}
