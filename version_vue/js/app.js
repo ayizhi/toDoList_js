@@ -34,7 +34,8 @@
 
         computed: {
             filteredTodos: function () {
-                return filter[this.visibility](this.todos);
+                console.log(132123)
+                return filters[this.visibility](this.todos);
             },
             remaining: function () {
                 return filters.active(this.todos).length;
@@ -44,9 +45,9 @@
                     return this.remaining === 0;
                 },
                 set: function (value) {
-                    this.todos.forEach(function(todo){
+                    this.todos.forEach(function (todo) {
                         todo.completed = value;
-                    })
+                    });
                 }
             }
         },
