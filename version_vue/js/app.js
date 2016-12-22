@@ -34,7 +34,6 @@
 
         computed: {
             filteredTodos: function () {
-                console.log(132123)
                 return filters[this.visibility](this.todos);
             },
             remaining: function () {
